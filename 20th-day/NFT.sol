@@ -19,7 +19,7 @@ contract Contract is ERC721Base {
 
 
    /**
-    * @dev ERC721Base library's constructor takes four Parameters
+    
     * _name of the NFT, _symbol of the NFT,
     *  _royaltyRecipient (address) who will get a royalty on secondary sale, _royaltyBps (royality percentage)
     * we don't need to set Royality for the purpose of our smart contract. setting _royaltyBps to Zero
@@ -40,9 +40,7 @@ contract Contract is ERC721Base {
        )
    {}
 
-   /**
-    * @dev createToken mint the ERC721 Token / NFT with the check that the user have paid $1 to mint the NFT
-    */
+
   function createToken() public payable
    {
        // require statement to check the user have paid $1 to mint the NFT
@@ -64,17 +62,13 @@ contract Contract is ERC721Base {
        _setTokenURI(newTokenId, tokenURI);
    }
 
-   /**
-    * @dev function to withdraw funds present in contract address to owner address. In this case, the address that deploy this smart contract
-    */
+ 
    function withdraw() public onlyOwner(){
        (bool callSuccess, ) = payable(msg.sender).call{value: address(this).balance}("");
        require(callSuccess,"TRANSFER_FUND_FAIL");
    }
 
-   /**
-    * @dev view / Getter function to get the balance of the smart contract
-    */
+
    function getContractBalance() public view returns(uint){
        return address(this).balance;
    }
